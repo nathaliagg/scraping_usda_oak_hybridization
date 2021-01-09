@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Q. cornelius-mulleri", "label": "Q. cornelius-mulleri", "shape": "dot", "size": 10}, {"id": "Q. engelmannii", "label": "Q. engelmannii", "shape": "dot", "size": 10}, {"id": "Q. dumosa", "label": "Q. dumosa", "shape": "dot", "size": 10}, {"id": "Q. incana", "label": "Q. incana", "shape": "dot", "size": 10}, {"id": "Q. laevis", "label": "Q. laevis", "shape": "dot", "size": 10}, {"id": "Q. laurifolia", "label": "Q. laurifolia", "shape": "dot", "size": 10}, {"id": "Q. nigra", "label": "Q. nigra", "shape": "dot", "size": 10}, {"id": "Q. myrtifolia", "label": "Q. myrtifolia", "shape": "dot", "size": 10}, {"id": "Q. velutina", "label": "Q. velutina", "shape": "dot", "size": 10}, {"id": "Q. falcata", "label": "Q. falcata", "shape": "dot", "size": 10}, {"id": "Q. arkansana", "label": "Q. arkansana", "shape": "dot", "size": 10}, {"id": "Q. marilandica", "label": "Q. marilandica", "shape": "dot", "size": 10}, {"id": "Q. alba", "label": "Q. alba", "shape": "dot", "size": 10}, {"id": "Q. macrocarpa", "label": "Q. macrocarpa", "shape": "dot", "size": 10}, {"id": "Q. robur", "label": "Q. robur", "shape": "dot", "size": 10}, {"id": "Q. prinoides", "label": "Q. prinoides", "shape": "dot", "size": 10}, {"id": "Q. bicolor", "label": "Q. bicolor", "shape": "dot", "size": 10}, {"id": "Q. montana", "label": "Q. montana", "shape": "dot", "size": 10}, {"id": "Q. virginiana", "label": "Q. virginiana", "shape": "dot", "size": 10}, {"id": "Q. michauxii", "label": "Q. michauxii", "shape": "dot", "size": 10}, {"id": "Q. muehlenbergii", "label": "Q. muehlenbergii", "shape": "dot", "size": 10}, {"id": "Q. lyrata", "label": "Q. lyrata", "shape": "dot", "size": 10}, {"id": "Q. stellata", "label": "Q. stellata", "shape": "dot", "size": 10}, {"id": "Q. coccinea", "label": "Q. coccinea", "shape": "dot", "size": 10}, {"id": "Q. rubra", "label": "Q. rubra", "shape": "dot", "size": 10}, {"id": "Q. ilicifolia", "label": "Q. ilicifolia", "shape": "dot", "size": 10}, {"id": "Q. palustris", "label": "Q. palustris", "shape": "dot", "size": 10}, {"id": "Q. shumardii", "label": "Q. shumardii", "shape": "dot", "size": 10}, {"id": "Q. imbricaria", "label": "Q. imbricaria", "shape": "dot", "size": 10}, {"id": "Q. minima", "label": "Q. minima", "shape": "dot", "size": 10}, {"id": "Q. phellos", "label": "Q. phellos", "shape": "dot", "size": 10}, {"id": "Q. georgiana", "label": "Q. georgiana", "shape": "dot", "size": 10}, {"id": "Q. pagoda", "label": "Q. pagoda", "shape": "dot", "size": 10}, {"id": "Q. ellipsoidalis", "label": "Q. ellipsoidalis", "shape": "dot", "size": 10}, {"id": "Q. douglasii", "label": "Q. douglasii", "shape": "dot", "size": 10}, {"id": "Q. garryana", "label": "Q. garryana", "shape": "dot", "size": 10}, {"id": "Q. lobata", "label": "Q. lobata", "shape": "dot", "size": 10}, {"id": "Q. durata", "label": "Q. durata", "shape": "dot", "size": 10}, {"id": "Q. agrifolia", "label": "Q. agrifolia", "shape": "dot", "size": 10}, {"id": "Q. kelloggii", "label": "Q. kelloggii", "shape": "dot", "size": 10}, {"id": "Q. gravesii", "label": "Q. gravesii", "shape": "dot", "size": 10}, {"id": "Q. hypoleucoides", "label": "Q. hypoleucoides", "shape": "dot", "size": 10}, {"id": "Q. turbinella", "label": "Q. turbinella", "shape": "dot", "size": 10}, {"id": "Q. chapmanii", "label": "Q. chapmanii", "shape": "dot", "size": 10}, {"id": "Q. arizonica", "label": "Q. arizonica", "shape": "dot", "size": 10}, {"id": "Q. grisea", "label": "Q. grisea", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Q. cornelius-mulleri", "hybrid": "Q. acutidens", "to": "Q. engelmannii", "weight": 1}, {"from": "Q. engelmannii", "hybrid": "Q. grandidentata", "to": "Q. dumosa", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. ashei", "to": "Q. laevis", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. atlantica", "to": "Q. laurifolia", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. caduca", "to": "Q. nigra", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. oviedoensis", "to": "Q. myrtifolia", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. podophylla", "to": "Q. velutina", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. subintegra", "to": "Q. falcata", "weight": 1}, {"from": "Q. incana", "hybrid": "Q. venulosa", "to": "Q. arkansana", "weight": 1}, {"from": "Q. laevis", "hybrid": "Q. blufftonensis", "to": "Q. falcata", "weight": 1}, {"from": "Q. laevis", "hybrid": "Q. mellichampii", "to": "Q. laurifolia", "weight": 1}, {"from": "Q. laevis", "hybrid": "Q. walteriana", "to": "Q. nigra", "weight": 1}, {"from": "Q. laurifolia", "hybrid": "Q. cocksii", "to": "Q. velutina", "weight": 1}, {"from": "Q. laurifolia", "hybrid": "Q. diversiloba", "to": "Q. marilandica", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. bebbiana", "to": "Q. macrocarpa", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. bimundorum", "to": "Q. robur", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. faxonii", "to": "Q. prinoides", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. jackiana", "to": "Q. bicolor", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. saulii", "to": "Q. montana", "weight": 1}, {"from": "Q. alba", "hybrid": "Q. unknown", "to": "Q. virginiana", "weight": 1}, {"from": "Q. macrocarpa", "hybrid": "Q. beckyae", "to": "Q. prinoides", "weight": 1}, {"from": "Q. macrocarpa", "hybrid": "Q. byarsii", "to": "Q. michauxii", "weight": 1}, {"from": "Q. macrocarpa", "hybrid": "Q. deamii", "to": "Q. muehlenbergii", "weight": 1}, {"from": "Q. macrocarpa", "hybrid": "Q. megaleia", "to": "Q. lyrata", "weight": 1}, {"from": "Q. macrocarpa", "hybrid": "Q. schuettei", "to": "Q. bicolor", "weight": 1}, {"from": "Q. prinoides", "hybrid": "Q. stelloides", "to": "Q. stellata", "weight": 1}, {"from": "Q. prinoides", "hybrid": "Q. introgressa", "to": "Q. bicolor", "weight": 1}, {"from": "Q. coccinea", "hybrid": "Q. benderi", "to": "Q. rubra", "weight": 1}, {"from": "Q. coccinea", "hybrid": "Q. fontana", "to": "Q. velutina", "weight": 1}, {"from": "Q. coccinea", "hybrid": "Q. robbinsii", "to": "Q. ilicifolia", "weight": 1}, {"from": "Q. rubra", "hybrid": "Q. columnaris", "to": "Q. palustris", "weight": 1}, {"from": "Q. rubra", "hybrid": "Q. fernaldii", "to": "Q. ilicifolia", "weight": 1}, {"from": "Q. rubra", "hybrid": "Q. hawkinsiae", "to": "Q. velutina", "weight": 1}, {"from": "Q. rubra", "hybrid": "Q. riparia", "to": "Q. shumardii", "weight": 1}, {"from": "Q. rubra", "hybrid": "Q. runcinata", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. michauxii", "hybrid": "Q. bernardiensis", "to": "Q. stellata", "weight": 1}, {"from": "Q. michauxii", "hybrid": "Q. tottenii", "to": "Q. lyrata", "weight": 1}, {"from": "Q. stellata", "hybrid": "Q. neotharpii", "to": "Q. minima", "weight": 1}, {"from": "Q. stellata", "hybrid": "Q. sterretii", "to": "Q. lyrata", "weight": 1}, {"from": "Q. stellata", "hybrid": "Q. substellata", "to": "Q. bicolor", "weight": 1}, {"from": "Q. robur", "hybrid": "Q. sargentii", "to": "Q. montana", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. caesariensis", "to": "Q. ilicifolia", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. garlandensis", "to": "Q. nigra", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. incomita", "to": "Q. marilandica", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. palmeriana", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. subfalcata", "to": "Q. phellos", "weight": 1}, {"from": "Q. falcata", "hybrid": "Q. willdenowiana", "to": "Q. velutina", "weight": 1}, {"from": "Q. ilicifolia", "hybrid": "Q. brittonii", "to": "Q. marilandica", "weight": 1}, {"from": "Q. ilicifolia", "hybrid": "Q. giffordii", "to": "Q. phellos", "weight": 1}, {"from": "Q. ilicifolia", "hybrid": "Q. rehderi", "to": "Q. velutina", "weight": 1}, {"from": "Q. marilandica", "hybrid": "Q. rudkinii", "to": "Q. phellos", "weight": 1}, {"from": "Q. marilandica", "hybrid": "Q. smallii", "to": "Q. georgiana", "weight": 1}, {"from": "Q. marilandica", "hybrid": "Q. sterilis", "to": "Q. nigra", "weight": 1}, {"from": "Q. marilandica", "hybrid": "Q. tridentata", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. nigra", "hybrid": "Q. capesii", "to": "Q. phellos", "weight": 1}, {"from": "Q. nigra", "hybrid": "Q. demareei", "to": "Q. velutina", "weight": 1}, {"from": "Q. nigra", "hybrid": "Q. neopalmeri", "to": "Q. shumardii", "weight": 1}, {"from": "Q. phellos", "hybrid": "Q. filialis", "to": "Q. velutina", "weight": 1}, {"from": "Q. phellos", "hybrid": "Q. ludoviciana", "to": "Q. pagoda", "weight": 1}, {"from": "Q. phellos", "hybrid": "Q. moultonensis", "to": "Q. shumardii", "weight": 1}, {"from": "Q. phellos", "hybrid": "Q. schochiana", "to": "Q. palustris", "weight": 1}, {"from": "Q. velutina", "hybrid": "Q. discreta", "to": "Q. shumardii", "weight": 1}, {"from": "Q. velutina", "hybrid": "Q. leana", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. velutina", "hybrid": "Q. palaeolithicola", "to": "Q. ellipsoidalis", "weight": 1}, {"from": "Q. velutina", "hybrid": "Q. vaga", "to": "Q. palustris", "weight": 1}, {"from": "Q. palustris", "hybrid": "Q. exacta", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. palustris", "hybrid": "Q. mutabilis", "to": "Q. shumardii", "weight": 1}, {"from": "Q. muehlenbergii", "hybrid": "Q. introgressa", "to": "Q. bicolor", "weight": 1}, {"from": "Q. shumardii", "hybrid": "Q. egglestonii", "to": "Q. imbricaria", "weight": 1}, {"from": "Q. douglasii", "hybrid": "Q. eplingii", "to": "Q. garryana", "weight": 1}, {"from": "Q. douglasii", "hybrid": "Q. jolonensis", "to": "Q. lobata", "weight": 1}, {"from": "Q. garryana", "hybrid": "Q. howellii", "to": "Q. dumosa", "weight": 1}, {"from": "Q. garryana", "hybrid": "Q. subconvexa", "to": "Q. durata", "weight": 1}, {"from": "Q. agrifolia", "hybrid": "Q. ganderi", "to": "Q. kelloggii", "weight": 1}, {"from": "Q. dumosa", "hybrid": "Q. townei", "to": "Q. lobata", "weight": 1}, {"from": "Q. bicolor", "hybrid": "Q. humidicola", "to": "Q. lyrata", "weight": 1}, {"from": "Q. bicolor", "hybrid": "Q. nessiana", "to": "Q. virginiana", "weight": 1}, {"from": "Q. gravesii", "hybrid": "Q. inconstans", "to": "Q. hypoleucoides", "weight": 1}, {"from": "Q. lobata", "hybrid": "Q. munzii", "to": "Q. turbinella", "weight": 1}, {"from": "Q. minima", "hybrid": "Q. rolfsii", "to": "Q. chapmanii", "weight": 1}, {"from": "Q. arizonica", "hybrid": "Q. organensis", "to": "Q. grisea", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
